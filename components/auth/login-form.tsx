@@ -21,10 +21,10 @@ import { login } from "@/actions/login";
 import { useSearchParams } from "next/navigation";
 
 const LoginForm = () => {
-  const searchParamas = useSearchParams();
+  const searchParams = useSearchParams();
   const urlError =
-    searchParamas.get("error") === "OAuthAccountNotLinked"
-      ? "Email already in use with different provider"
+    searchParams.get("error") === "OAuthAccountNotLinked"
+      ? "Email already in use with different provider!"
       : "";
 
   const [error, setError] = useState<string | undefined>("");
@@ -46,8 +46,7 @@ const LoginForm = () => {
     startTransition(() => {
       login(values).then((data) => {
         setError(data?.error);
-        //TODO: Add when we add 2FA
-        //setSuccess(data?.success);
+        setSuccess(data?.success);
       });
     });
   };
